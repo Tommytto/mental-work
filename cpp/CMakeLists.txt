@@ -7,9 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # ---------------------------
 # 1) Your normal executable(s)
 # ---------------------------
-add_executable(binsearch
-  binsearch/main.cpp
-)
+#add_executable(binsearch
+#  binsearch/binsearch.cpp
+#)
 
 # If later you want include dirs:
 # target_include_directories(binsearch PRIVATE some_folder)
