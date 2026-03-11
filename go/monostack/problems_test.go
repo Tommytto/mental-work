@@ -88,3 +88,87 @@ func TestStockSpan(t *testing.T) {
 		})
 	}
 }
+
+func TestDailyTemperatures(t *testing.T) {
+	tests := []struct {
+		name string
+		temp []int
+		want []int
+	}{
+		{"example", []int{73, 74, 75, 71, 69, 72, 76, 73}, []int{1, 1, 4, 2, 1, 1, 0, 0}},
+		{"single", []int{50}, []int{0}},
+		{"ascending", []int{10, 20, 30, 40}, []int{1, 1, 1, 0}},
+		{"descending", []int{40, 30, 20, 10}, []int{0, 0, 0, 0}},
+		{"all equal", []int{70, 70, 70}, []int{0, 0, 0}},
+		{"two elements up", []int{30, 40}, []int{1, 0}},
+		{"two elements down", []int{40, 30}, []int{0, 0}},
+		{"valley", []int{80, 60, 90}, []int{2, 1, 0}},
+		{"warm at end", []int{50, 40, 30, 60}, []int{3, 2, 1, 0}},
+		{"alternating", []int{70, 80, 70, 80}, []int{1, 0, 1, 0}},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := DailyTemperatures(tt.temp)
+			if !slices.Equal(got, tt.want) {
+				t.Errorf("DailyTemperatures(%v) = %v, want %v", tt.temp, got, tt.want)
+			}
+		})
+	}
+}
+
+func TestLargestRectangleHistogram(t *testing.T) {
+	tests := []struct {
+		name    string
+		heights []int
+		want    int
+	}{
+		{"example", []int{2, 1, 5, 6, 2, 3}, 10},
+		{"single", []int{5}, 5},
+		{"two equal", []int{3, 3}, 6},
+		{"ascending", []int{1, 2, 3, 4}, 6},
+		{"descending", []int{4, 3, 2, 1}, 6},
+		{"all equal", []int{3, 3, 3, 3}, 12},
+		{"valley", []int{5, 1, 5}, 5},
+		{"peak", []int{1, 5, 1}, 5},
+		{"tall middle", []int{2, 4, 6, 4, 2}, 12},
+		{"single tall", []int{1, 1, 10, 1, 1}, 10},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := LargestRectangle2(tt.heights)
+			if got != tt.want {
+				t.Errorf("LargestRectangleHistogram(%v) = %v, want %v", tt.heights, got, tt.want)
+			}
+		})
+	}
+}
+
+func TestLargestRectangleHistogramOnePass(t *testing.T) {
+	tests := []struct {
+		name    string
+		heights []int
+		want    int
+	}{
+		{"example", []int{2, 1, 5, 6, 2, 3}, 10},
+		{"single", []int{5}, 5},
+		{"two equal", []int{3, 3}, 6},
+		{"ascending", []int{1, 2, 3, 4}, 6},
+		{"descending", []int{4, 3, 2, 1}, 6},
+		{"all equal", []int{3, 3, 3, 3}, 12},
+		{"valley", []int{5, 1, 5}, 5},
+		{"peak", []int{1, 5, 1}, 5},
+		{"tall middle", []int{2, 4, 6, 4, 2}, 12},
+		{"single tall", []int{1, 1, 10, 1, 1}, 10},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := LargestRectangleOnePass2(tt.heights)
+			if got != tt.want {
+				t.Errorf("LargestRectangleHistogramOnePass(%v) = %v, want %v", tt.heights, got, tt.want)
+			}
+		})
+	}
+}
