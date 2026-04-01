@@ -44,3 +44,14 @@ target_link_libraries(binsearch_tests
 
 include(GoogleTest)
 gtest_discover_tests(binsearch_tests)
+
+add_executable(partition_tests
+  selection_and_partitioning/tests.cpp
+)
+
+target_link_libraries(partition_tests
+  PRIVATE
+  GTest::gtest_main
+)
+
+gtest_discover_tests(partition_tests)
